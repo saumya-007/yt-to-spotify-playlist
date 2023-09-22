@@ -1,0 +1,52 @@
+
+.timeline {
+  display: flex;
+  height: 10vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.timeline-items {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timeline-step {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(6, 6, 90);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+}
+
+.timeline-step-done {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(73, 121, 0);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+}
+
+.timeline-break {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 240px;
+  height: 40px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 100px;
+}

@@ -1,0 +1,38 @@
+.main-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 30%;
+  width: 100%;
+}
+
+.container{
+  flex: 70%;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10%;
+}
+
+.youtube {
+    background: red;
+    color: white;
+    border-radius: 0px;
+}
+
+.spotify {
+  background: rgb(4, 156, 24);
+  color: white;
+  border-radius: 0px;
+}

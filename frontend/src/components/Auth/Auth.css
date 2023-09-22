@@ -1,0 +1,17 @@
+.youtube {
+  background: red;
+  color: white;
+  border-radius:10px;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.spotify {
+  background: #8ab7a8;
+  color: white;
+  border-radius:10px;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
