@@ -35,8 +35,8 @@ const refreshTokenIfExpired = async function (req, res, next) {
   const maxExpiryAllowed = getTime() - 300000;
 
   if (googleExpiryDate < maxExpiryAllowed) {
+    console.info('[Middleware] :: Warning ====> Google accesstoken expired')
     const updatedTokenDetails = await googleAPICall.updateAccessToken({ refreshToken: tokenDetails.refresh_token_google });
-    console.log(updatedTokenDetails)
     const expiryTime = new Date(Date.now() + (updatedTokenDetails.expires_in * 1000));
     await updateTokenDetailsByUserId({
       userId,
@@ -44,10 +44,11 @@ const refreshTokenIfExpired = async function (req, res, next) {
       updatedBy: userId,
       googleTokenExpiresAt: expiryTime
     });
+    console.info('[Middleware] :: Action ====> Google accesstoken updated')
   }
   if (spotifyExpiryDate < maxExpiryAllowed) {
+    console.info('[Middleware] :: Warning ====> Spotify accesstoken expired')
     const updatedTokenDetails = await spotifyAPICall.updateAccessToken({ refreshToken: tokenDetails.refresh_token_spotify });
-    console.log(updatedTokenDetails)
     const expiryTime = new Date(Date.now() + (updatedTokenDetails.expires_in * 1000));
     await updateTokenDetailsByUserId({
       userId,
@@ -55,6 +56,7 @@ const refreshTokenIfExpired = async function (req, res, next) {
       updatedBy: userId,
       spotifyTokenExpiresAt: expiryTime
     });
+    console.info('[Middleware] :: Action ====> Spotify accesstoken updated')
   }
 
   next();
