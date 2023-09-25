@@ -1,23 +1,7 @@
 const { responseSuccess, responseError } = require('../utils/constants');
-const {
-  googleOauthOptionsConfig,
-  spotifyOauthOptionsConfig,
-} = require('../config/config')
-const { wait, splitArray } = require('../utils/helperFunctions');
-const googleOauthConfig = require('../oauth-creeds-google');
-const spotifyOauthConfig = require('../oauth-creeds-spotify');
-
-const GoogleAPIUtils = require('../utils/GoogleAPIUtils');
-const googleAPICall = new GoogleAPIUtils({
-  googleOauthConfig,
-  googleOauthOptionsConfig,
-});
-
-const SpotifyAPIUtils = require('../utils/SpotifyAPIUtils');
-const spotifyAPICall = new SpotifyAPIUtils({
-  spotifyOauthConfig,
-  spotifyOauthOptionsConfig,
-});
+const { Worker } = require('worker_threads')
+const { join } = require('path');
+const converterWorkerFile = join(__dirname, '..', 'web workers', 'converterWorker.js')
 
 const {
   getTokenDetailsByUserId,
@@ -42,7 +26,7 @@ module.exports.convertYoutubePlaylist = async function (req, res) {
     }
 
     // Validating Youtube Playlist URL
-    const ytRegex = /^https:\/\/www\.youtube\.com\/playlist\?list=[A-Za-z0-9_\-]+(&si=[A-Za-z0-9_\-]+)?$/gm;
+    const ytRegex = /^https:\/\/(www\.)?youtube\.com\/playlist\?list=[A-Za-z0-9_\-]+(&si=[A-Za-z0-9_\-]+)?$/gm;
     const serchParams = playlistUrl.split('?')[1];
     const playlistUrlSearchParams = new URLSearchParams(serchParams);
     if (!ytRegex.test(playlistUrl)) {
@@ -53,62 +37,27 @@ module.exports.convertYoutubePlaylist = async function (req, res) {
       }
     }
 
-    let nextPageToken = null;
-    let spotifyTracksUriList = [];
-    let failedToFindOnSpotify = [];
-
-    do {
-      // Getting youtube playlist playlist details (Can get a max of 50 items)
-      const googlePlaylistDetails = await googleAPICall.getPlaylistDetails({
-        accessToken: userTokenDetails.access_token_google,
-        metaData: {
-          playlistUrlSearchParams,
-        },
-        wantedItems: ['trackNames'],
-        nextPageToken,
-      });
-
-      nextPageToken = googlePlaylistDetails.nextPageToken;
-
-      const spotifyTrackItemsStatus = await Promise.all(googlePlaylistDetails.trackNames.map(async (name) => {
-        return await spotifyAPICall.searchSpotifyTrackByName({
-          accessToken: userTokenDetails.access_token_spotify,
-          trackName: name
-        });
-      }));
-
-      spotifyTracksUriList.push(...spotifyTrackItemsStatus.filter((item) => item.uri).map((item) => item.uri));
-      failedToFindOnSpotify.push(...spotifyTrackItemsStatus.filter((item) => item.unableToConvert).map((item) => item.unableToConvert));
-      
-      if(nextPageToken) await wait(5) // Addded to deal with spotify rate limiting
-
-    } while (nextPageToken);
-
-    // Once all data is recieved from sportify we we create a new playlist
-    const newSpotifyPlayList = await spotifyAPICall.createSpotifyPlaylist({
-      accessToken: userTokenDetails.access_token_spotify,
-      userId: userTokenDetails.spotify_user_id,
-      playlistName,
-      playlistDescription,
-    })
-
-    const splittedSpotifyTracksUriList = splitArray({parts: 100, arr: spotifyTracksUriList});
-
-    // Add data to that playlist (Can add A maximum of 100 items)
-    splittedSpotifyTracksUriList.map(async (uriList) => {
-      return await spotifyAPICall.addItemToSpotifyPlaylist({
-        accessToken: userTokenDetails.access_token_spotify,
-        playlistId: newSpotifyPlayList.id,
-        playlistURIs: uriList,
+    const workerData = { userTokenDetails, playlistId: playlistUrlSearchParams.get('list'), playlistName,  playlistDescription };
+    // creating worker thread to avoid blocking of main thread while complex converstion process 
+    const conversionResponse = await new Promise((resolve, reject) => {
+      const converterWorker = new Worker(converterWorkerFile, { workerData });
+      converterWorker.on('message', resolve);
+      converterWorker.on('error', reject);
+      converterWorker.on('exit', (code) => {
+        if (code !== 0)
+          reject(new Error(`Worker stopped with exit code ${code}`));
       })
+    });
+    
+    const { generatedUrl, failedToFindOnSpotify } = conversionResponse;
+    res.status(200).send({
+      ...responseSuccess, data: {
+        url: generatedUrl,
+        unableToCopy: failedToFindOnSpotify
+      }
     })
-
-    res.status(200).send({ ...responseSuccess, data: {
-      url: newSpotifyPlayList.external_urls.spotify,
-      unableToCopy: newSpotifyPlayList
-    }})
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(404).send({ ...responseError, message: 'Error while converting playlist' })
   }
 }

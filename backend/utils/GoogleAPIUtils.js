@@ -84,7 +84,7 @@ class GoogleAPIUtils {
     try {
       const params = {
         ...googleAPIs.playlistDetails.config,
-        playlistId: metaData.playlistUrlSearchParams.get('list'),
+        playlistId: metaData.playlistId,
         key: process.env.GOOGLE_API_KEY
       }
 
