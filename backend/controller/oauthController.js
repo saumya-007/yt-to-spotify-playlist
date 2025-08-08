@@ -3,7 +3,7 @@ const { responseSuccess, responseError } = require('../utils/constants');
 const {
   googleOauthOptionsConfig,
   spotifyOauthOptionsConfig,
-} = require('../config/config')
+} = require('../config/config');
 const { generateRandomString } = require('../utils/helperFunctions');
 const googleOauthConfig = require('../oauth-creeds-google');
 const spotifyOauthConfig = require('../oauth-creeds-spotify');
@@ -99,6 +99,7 @@ module.exports.getSpotifyOauthLink = function (_, res) {
     const oauthLink = spotifyAPICall.generateOauthLink({ state });
     res.status(200).send({ ...responseSuccess, data: oauthLink });
   } catch (err) {
+    console.log(err);
     res.status(400).send({ ...responseError, message: 'Error while generating oauth link for spotify' });
   }
 }

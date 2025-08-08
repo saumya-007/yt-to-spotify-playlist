@@ -1,11 +1,31 @@
 .spinner-wrapper {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100vh;
-  opacity: 0.5;
-  background-color: rgb(206, 206, 206);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.loading-text {
+  margin-top: 30px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.loading-subtext {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
 }
 
 .lds-roller {
@@ -22,10 +42,10 @@
   content: " ";
   display: block;
   position: absolute;
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: black;
+  background: var(--primary-color);
   margin: -4px 0 0 -4px;
 }
 .lds-roller div:nth-child(1) {

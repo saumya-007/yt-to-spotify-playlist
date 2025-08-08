@@ -21,6 +21,7 @@ const constants = {
       url: 'https://api.spotify.com/v1/search',
       config: {
         type_track: 'track',
+        type_artist: 'artist',
         limit: 1,
         offset: 0,
       }

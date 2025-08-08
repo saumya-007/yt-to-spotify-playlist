@@ -9,7 +9,7 @@ module.exports.generateRandomString = function(length) {
 };
 
 module.exports.wait  = async function(timeInSec) {
-  console.info(`[wait called] ==> WAITING FOR ${timeInSec} SEC`)
+  console.info(`[wait called] ==> WAITING FOR ${timeInSec} SEC`);
   await new Promise(resolve => setTimeout(resolve, timeInSec * 1000));
 }
 
@@ -17,7 +17,7 @@ module.exports.splitArray = function({parts = 10, arr}) {
   let start = 0;
   let end = parts;
   const response = [];
-  while (start < arr.length) {
+  while (start < arr.length) {  
       response.push(arr.slice(start, end))
       start = end;
       end += parts;

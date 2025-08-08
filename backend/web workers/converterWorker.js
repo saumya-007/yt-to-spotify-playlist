@@ -34,16 +34,16 @@ let failedToFindOnSpotify = [];
         metaData: {
           playlistId,
         },
-        wantedItems: ['trackNames'],
         nextPageToken,
       });
 
       nextPageToken = googlePlaylistDetails.nextPageToken;
 
-      const spotifyTrackItemsStatus = await Promise.all(googlePlaylistDetails.trackNames.map(async (name) => {
+      const spotifyTrackItemsStatus = await Promise.all(googlePlaylistDetails.trackDetails.map(async (detail) => {
         return await spotifyAPICall.searchSpotifyTrackByName({
           accessToken: userTokenDetails.access_token_spotify,
-          trackName: name
+          trackName: detail.name,
+          artistName: detail.artist
         });
       }));
 
