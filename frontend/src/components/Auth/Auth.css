@@ -1,17 +1,100 @@
+/* Auth Page Styles */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.auth-logo-container {
+  position: relative;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-hover);
+  transition: var(--transition);
+}
+
+.auth-logo-container:hover {
+  transform: scale(1.02);
+}
+
+.auth-logo {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+}
+
+.auth-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.auth-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.auth-subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+/* Platform-specific button styles */
 .youtube {
-  background: red;
+  background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
   color: white;
-  border-radius:10px;
-  padding: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.youtube:hover {
+  background: linear-gradient(135deg, #FF1a1a 0%, #E60000 100%);
+}
+
+.youtube::before {
+  content: '▶';
+  margin-right: 8px;
   font-size: 18px;
-  font-weight: bold;
 }
 
 .spotify {
-  background: #8ab7a8;
+  background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
   color: white;
-  border-radius:10px;
-  padding: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.spotify:hover {
+  background: linear-gradient(135deg, #1ed760 0%, #1DB954 100%);
+}
+
+.spotify::before {
+  content: '♪';
+  margin-right: 8px;
   font-size: 18px;
-  font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .auth-container {
+    gap: 30px;
+    padding: 20px 16px;
+  }
+
+  .auth-logo {
+    max-width: 250px;
+  }
+
+  .auth-title {
+    font-size: 20px;
+  }
 }

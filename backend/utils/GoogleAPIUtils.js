@@ -80,7 +80,7 @@ class GoogleAPIUtils {
   }
 
   // CALL TO GET PLAYLIST DETAILS
-  async getPlaylistDetails({ accessToken, metaData, wantedItems = ['trackNames'], nextPageToken = null }) {
+  async getPlaylistDetails({ accessToken, metaData, nextPageToken = null }) {
     try {
       const params = {
         ...googleAPIs.playlistDetails.config,
@@ -101,15 +101,14 @@ class GoogleAPIUtils {
 
       const returnObject = {
         nextPageToken: playlistDetails.data.nextPageToken || null, 
+        trackDetails: [],
       };
 
-      wantedItems.forEach((wantedItem) => {
-        switch (wantedItem) {
-          case 'trackNames': {
-          returnObject['trackNames'] = playlistDetails.data.items.map((item) => item.snippet.title)
-          }
-          default: {}
-        }
+      playlistDetails.data.items.map((item) => {
+        returnObject['trackDetails'].push({
+          name: item.snippet.title,
+          artist: item.snippet.videoOwnerChannelTitle,
+        });
       });
 
       return returnObject;

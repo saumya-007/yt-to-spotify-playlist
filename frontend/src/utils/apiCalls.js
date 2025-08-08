@@ -54,6 +54,7 @@ const authenticateSportify = async ({ setResponse, metaData, setIsLoading }) => 
       }
     }).then((response) => {
       setIsLoading(false);
+      localStorage.setItem('spotifyAuthenticated', 'true');
       setResponse(response.data.data);
     }).catch((error) => {
       setIsLoading(false);
@@ -104,10 +105,16 @@ const convertYoutubeData = async ({ setResponse, metaData, setIsLoading }) => {
     }
     }).then((response) => {
       setIsLoading(false);
+      console.log('Full API response:', response);
+      console.log('Response data:', response.data);
+      console.log('Response data.data:', response.data.data);
+      console.log('URL from response:', response.data.data.url);
       setResponse(response.data.data.url);
     }).catch((error) => {
       setIsLoading(false);
-      console.log(error);
+      console.error('API Error:', error);
+      console.error('Error response:', error.response);
+      toast.error('Failed to convert playlist');
     });
   } catch (e) {
     toast.error('Error while generating oauth link')

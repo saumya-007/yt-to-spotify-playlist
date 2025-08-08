@@ -55,6 +55,7 @@ class SpotifyAPIUtils {
       console.info('[SpotifyAPIUtils] :: Processing done ====> getAccessToken')
     }
   }
+
   async updateAccessToken({ refreshToken }) {
     try {
       const tokenDetails = await axios({
@@ -77,8 +78,6 @@ class SpotifyAPIUtils {
       console.info('[SpotifyAPIUtils] :: Processing done ====> updateAccessToken')
     }
   }
-
-
 
   // CALL TO GET SPOTIFY USER DETAILS
   async getSpotifyUserDetails({ accessToken }) {
@@ -124,14 +123,15 @@ class SpotifyAPIUtils {
   }
 
   // CALL TO SEARCH A TRACT ON SPOTIFY
-  async searchSpotifyTrackByName({ accessToken, trackName }) {
+  async searchSpotifyTrackByName({ accessToken, trackName, artistName }) {
     try {
-      if (!trackName) {
+      if (!trackName || !artistName) {
         return ''
       }
       const options = {
         // fixed format to search using the remaster%20 or remaster<SPACE> URI option
-        q: `remaster%20${spotifyAPIs.searchPlaylist.config.type_track}:${trackName}`,
+        // Example: remaster%20track:Doxy%20artist:Arctic%20Monkeys%20-%20Topic
+        q: `remaster ${spotifyAPIs.searchPlaylist.config.type_track}:${trackName} ${spotifyAPIs.searchPlaylist.config.type_artist}:${artistName}`.split(' ').join('%20'),
         type: spotifyAPIs.searchPlaylist.config.type_track,
         limit: spotifyAPIs.searchPlaylist.config.limit,
         offset: spotifyAPIs.searchPlaylist.config.offset,

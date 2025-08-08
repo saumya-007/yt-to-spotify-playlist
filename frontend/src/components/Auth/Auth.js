@@ -36,13 +36,24 @@ function Auth({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code])
 
+  const platformName = buttonClass === 'youtube' ? 'YouTube' : 'Spotify';
+  const actionText = buttonClass === 'youtube' ? 'Connect your YouTube account to get started' : 'Connect your Spotify account to create playlists';
+
   return (
-    <div className='container'>
-      <div>
-        <img src={backgroundImage} alt={'logo'} height={'500px'} />
+    <div className='container auth-container'>
+      <div className='auth-logo-container'>
+        <img src={backgroundImage} alt={`${platformName} logo`} className='auth-logo' />
       </div>
-      <div>
-        <a className={`submit-btn ${buttonClass.length ? buttonClass : ''}`} href={oauthLink}>Login</a>
+      <div className='auth-button-container'>
+        <h2 className='auth-title'>Connect to {platformName}</h2>
+        <p className='auth-subtitle'>{actionText}</p>
+        <a
+          className={`submit-btn ${buttonClass.length ? buttonClass : ''}`}
+          href={oauthLink}
+          aria-label={`Login to ${platformName}`}
+        >
+          Connect {platformName}
+        </a>
       </div>
     </div>
   )
