@@ -1,5 +1,5 @@
 const { responseError } = require('../utils/constants')
-const { googleOauthOptionsConfig,  spotifyOauthOptionsConfig } = require('../config/config')
+const { googleOauthOptionsConfig,  spotifyOauthOptionsConfig } = require('../config')
 const { getTime } = require('../utils/helperFunctions')
 const googleOauthConfig = require('../oauth-creeds-google')
 const spotifyOauthConfig = require('../oauth-creeds-spotify')

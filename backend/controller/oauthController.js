@@ -3,7 +3,7 @@ const { responseSuccess, responseError } = require('../utils/constants');
 const {
   googleOauthOptionsConfig,
   spotifyOauthOptionsConfig,
-} = require('../config/config');
+} = require('../config');
 const { generateRandomString } = require('../utils/helperFunctions');
 const googleOauthConfig = require('../oauth-creeds-google');
 const spotifyOauthConfig = require('../oauth-creeds-spotify');

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
 import './TimeLine.css';
+import { useState, useEffect } from 'react'
 import { TiTick } from "react-icons/ti";
 import { BiRightArrowAlt } from 'react-icons/bi';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -7,8 +7,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 function Timeline({
   isGoogleAuthenticated,
   isSpotifyAuthenticated,
-  setIsGoogleAuthenticated,
-  setIsSpotifyAuthenticated,
 }) {
 
   const navigate = useNavigate();
@@ -18,10 +16,8 @@ function Timeline({
   // Update current path when location changes
   useEffect(() => {
     setCurrentPath(location.pathname);
-    console.log('Timeline - Current path:', location.pathname);
-    console.log('Timeline - Google Auth:', isGoogleAuthenticated);
-    console.log('Timeline - Spotify Auth:', isSpotifyAuthenticated);
   }, [location.pathname, isGoogleAuthenticated, isSpotifyAuthenticated]);
+  console.log({isGoogleAuthenticated, isSpotifyAuthenticated})
 
   const googleAuthClickedHandler = () => navigate('/');
   const spotifyAuthClickedHandler = () => navigate('/spotify');
@@ -31,7 +27,6 @@ function Timeline({
   // Determine current step based on route
   const isOnResults = currentPath === '/results';
   const isOnConverter = currentPath === '/converter';
-  const isConverterCompleted = isOnResults;
 
   return (
     <>
@@ -60,13 +55,13 @@ function Timeline({
 
         {/* Step 3: Convert */}
         <div className='timeline-items'>
-          <span className={`${isConverterCompleted ? 'timeline-step-done' : (isOnConverter ? 'timeline-step-active' : 'timeline-step')}`} onClick={ConverterClickedHandler}>
-            {isConverterCompleted ? <TiTick /> : 3}
+          <span className={`${isOnResults ? 'timeline-step-done' : (isOnConverter ? 'timeline-step-active' : 'timeline-step')}`} onClick={ConverterClickedHandler}>
+            {isOnResults ? <TiTick /> : 3}
           </span>
           <div className='timeline-label'>Convert</div>
         </div>
         <div className='timeline-items'>
-          <span className={`timeline-break ${isConverterCompleted ? 'active' : ''}`}><BiRightArrowAlt size={40} /></span>
+          <span className={`timeline-break ${isOnResults ? 'active' : ''}`}><BiRightArrowAlt size={40} /></span>
         </div>
 
         {/* Step 4: Results */}

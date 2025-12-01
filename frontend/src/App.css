@@ -1,18 +1,71 @@
-/* CSS Variables for consistent theming */
+/* Modern Design System - Clean & Professional */
 :root {
-  --primary-color: #1DB954; /* Spotify Green */
-  --secondary-color: #FF0000; /* YouTube Red */
-  --accent-color: #191414; /* Dark */
-  --background-light: #f8f9fa;
-  --background-dark: #121212;
-  --text-primary: #191414;
-  --text-secondary: #6c757d;
-  --text-light: #ffffff;
-  --border-radius: 12px;
-  --border-radius-small: 8px;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
-  --transition: all 0.3s ease;
+  /* Light theme colors */
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --secondary: #64748b;
+  --accent: #0f172a;
+  
+  --surface-primary: #ffffff;
+  --surface-secondary: #f8fafc;
+  --surface-tertiary: #f1f5f9;
+  --surface-dark: #0f172a;
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #94a3b8;
+  --text-inverse: #ffffff;
+  
+  --success: #059669;
+  --success-light: #ecfdf5;
+  --error: #dc2626;
+  --error-light: #fef2f2;
+  --warning: #d97706;
+  
+  /* Spacing */
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  
+  /* Transitions */
+  --transition-normal: all 0.2s ease-in-out;
+}
+
+[data-theme="dark"] {
+  /* Dark theme colors */
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --secondary: #94a3b8;
+  --accent: #1e293b;
+  
+  --surface-primary: #1e293b;
+  --surface-secondary: #0f172a;
+  --surface-tertiary: #334155;
+  --surface-dark: #000000;
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #64748b;
+  --text-inverse: #0f172a;
+  
+  --success: #10b981;
+  --success-light: #064e3b;
+  --error: #ef4444;
+  --error-light: #7f1d1d;
+  --warning: #f59e0b;
 }
 
 * {
@@ -26,27 +79,30 @@ body {
   font-size: 16px;
   line-height: 1.6;
   color: var(--text-primary);
-  background: linear-gradient(135deg, var(--background-light) 0%, #e3f2fd 100%);
+  background: var(--surface-secondary);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
 }
 
 /* Input Styles */
 .link {
   width: 100%;
   max-width: 400px;
-  padding: 16px 20px;
-  border: 2px solid #e9ecef;
-  border-radius: var(--border-radius-small);
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
   font-size: 16px;
-  transition: var(--transition);
-  background: white;
-  box-shadow: var(--shadow);
+  transition: var(--transition-normal);
+  background: var(--surface-primary);
+  box-shadow: var(--shadow-sm);
 }
 
 .link:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.1);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
 }
 
 /* Button Styles */
@@ -54,28 +110,27 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 32px;
-  background: var(--primary-color);
-  color: var(--text-light);
+  padding: var(--space-md) var(--space-xl);
+  background: var(--primary);
+  color: var(--text-inverse);
   border: none;
-  border-radius: var(--border-radius);
+  border-radius: var(--radius-md);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  transition: var(--transition);
-  box-shadow: var(--shadow);
+  transition: var(--transition-normal);
+  box-shadow: var(--shadow-sm);
   min-width: 160px;
 }
 
 .submit-btn:hover {
-  background: #1ed760;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
+  background: var(--primary-hover);
+  box-shadow: var(--shadow-md);
 }
 
 .submit-btn:active {
-  transform: translateY(0);
+  transform: translateY(1px);
 }
 
 /* Layout Containers */
@@ -87,10 +142,9 @@ body {
 }
 
 .time-line-navigator {
-  background: white;
-  box-shadow: var(--shadow);
-  padding: 20px 0;
-  margin-bottom: 40px;
+  background: var(--surface-primary);
+  border-bottom: 1px solid #e2e8f0;
+  padding: var(--space-lg) 0;
 }
 
 .container {
@@ -99,7 +153,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 40px 20px;
+  padding: var(--space-3xl) var(--space-lg);
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
@@ -107,35 +161,35 @@ body {
 
 /* Copy Button */
 .copy-btn {
-  padding: 12px 16px;
-  background: var(--accent-color);
-  border-radius: var(--border-radius-small);
-  color: var(--text-light);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--accent);
+  border-radius: var(--radius-sm);
+  color: var(--text-inverse);
   border: none;
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
-  transition: var(--transition);
-  box-shadow: var(--shadow);
+  transition: var(--transition-normal);
+  box-shadow: var(--shadow-sm);
 }
 
 .copy-btn:hover {
-  background: #333;
-  transform: translateY(-1px);
+  background: #1e293b;
+  box-shadow: var(--shadow-md);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .container {
-    padding: 20px 16px;
+    padding: var(--space-lg) var(--space-md);
   }
 
   .submit-btn {
-    padding: 14px 24px;
+    padding: 14px var(--space-lg);
     font-size: 15px;
   }
 
   .link {
-    padding: 14px 16px;
+    padding: 14px var(--space-md);
   }
 }

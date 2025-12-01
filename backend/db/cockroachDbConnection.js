@@ -1,5 +1,5 @@
 const CockraochDBUtils = require('../utils/CockraochDBUtils');
-const { cockroachCloudCluster } = require('../config/config');
+const { cockroachCloudCluster } = require('../config');
 
 const cockroach = new CockraochDBUtils({
   connectionString: cockroachCloudCluster.connectionString,

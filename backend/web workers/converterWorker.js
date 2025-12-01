@@ -4,7 +4,7 @@ const { wait, splitArray } = require('../utils/helperFunctions');
 const {
   googleOauthOptionsConfig,
   spotifyOauthOptionsConfig,
-} = require('../config/config')
+} = require('../config')
 const googleOauthConfig = require('../oauth-creeds-google');
 const spotifyOauthConfig = require('../oauth-creeds-spotify');
 

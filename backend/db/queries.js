@@ -1,5 +1,5 @@
 const cockroach = require('./cockroachDbConnection');
-const { cockroachCloudCluster } = require('../config/config');
+const { cockroachCloudCluster } = require('../config');
 const database = cockroachCloudCluster.dbName;
 const TABLE_NAME_USERS = 'users'
 const TABLE_NAME_USER_TOKENS = 'token_details'

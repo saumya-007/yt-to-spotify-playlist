@@ -120,7 +120,7 @@ function ConverterComponenet({setIsLoading}) {
             onClick={convertHandler}
             disabled={!sourceLink.trim() || !playlistName.trim()}
           >
-            🎵 Convert Playlist
+            Convert Playlist
           </button>
 
 
