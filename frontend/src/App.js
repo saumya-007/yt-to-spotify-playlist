@@ -4,27 +4,27 @@ import { useNavigate, Route, Routes, Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// import ThirdPartyLogin from './components/ThirdPartyLogin/ThirdPartyLogin';
 import Auth from './components/Auth/Auth';
 import ConverterComponenet from './components/ConverterComponent/ConverterComponenet';
 import Results from './components/Results/Results';
 import Timeline from './components/TimeLine/TimeLine';
 import Loader from './components/Loader/Loader';
+import ThemeToggle from './components/ThemeToggle/ThemeToggle';
+import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 
 import API_REQUESTS from './utils/apiCalls';
 
 import youtubeLogo from './images/vecteezy_watercolor-youtube-vector-logo-icon_8276806.jpg'
 import spotifyLogo from './images/spotify logo.jpg'
 
-function App() {
-
+function AppContent() {
+  const { isDark } = useTheme();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleAuthenticated, setIsGoogleAuthenticated] = useState(false);
   const [isSpotifyAuthenticated, setIsSpotifyAuthenticated] = useState(false);
 
   useEffect(() => {
-
     API_REQUESTS.getUserTokenStatus({
       setResponse: (response) => {
         setIsGoogleAuthenticated(response.googleAuthenticated);
@@ -33,7 +33,6 @@ function App() {
       userId: localStorage.getItem('userId'),
     });
 
-    // Only navigate if we're not already on the target route or results
     const currentPath = window.location.pathname;
 
     if (isGoogleAuthenticated && currentPath !== '/spotify' && currentPath !== '/converter' && currentPath !== '/results') {
@@ -49,6 +48,7 @@ function App() {
       {
         isLoading ? <Loader /> :
           <>
+            <ThemeToggle />
             <ToastContainer
               position="top-center"
               autoClose={1000}
@@ -59,7 +59,7 @@ function App() {
               pauseOnFocusLoss
               draggable
               pauseOnHover
-              theme="light"
+              theme={isDark ? "dark" : "light"}
             />
             <div className='main-container'>
               <div className='time-line-navigator'>
@@ -103,6 +103,14 @@ function App() {
           </>
       }
     </>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 

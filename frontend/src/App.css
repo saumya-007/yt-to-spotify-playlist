@@ -1,8 +1,8 @@
 /* Modern Design System - Clean & Professional */
 :root {
   /* Light theme colors */
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
+  --primary: #374151;
+  --primary-hover: #1f2937;
   --secondary: #64748b;
   --accent: #0f172a;
   
@@ -41,25 +41,26 @@
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   
   /* Transitions */
-  --transition-normal: all 0.2s ease-in-out;
+  --transition-normal: all 0.3s ease-in-out;
+  --transition-theme: all 0.6s ease-in-out;
 }
 
 [data-theme="dark"] {
-  /* Dark theme colors */
-  --primary: #3b82f6;
-  --primary-hover: #2563eb;
+  /* Dark theme colors - Black shades */
+  --primary: #f8fafc;
+  --primary-hover: #e2e8f0;
   --secondary: #94a3b8;
-  --accent: #1e293b;
+  --accent: #f1f5f9;
   
-  --surface-primary: #1e293b;
-  --surface-secondary: #0f172a;
-  --surface-tertiary: #334155;
+  --surface-primary: #000000;
+  --surface-secondary: #0a0a0a;
+  --surface-tertiary: #1a1a1a;
   --surface-dark: #000000;
   
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-tertiary: #64748b;
-  --text-inverse: #0f172a;
+  --text-primary: #ffffff;
+  --text-secondary: #e2e8f0;
+  --text-tertiary: #94a3b8;
+  --text-inverse: #000000;
   
   --success: #10b981;
   --success-light: #064e3b;
@@ -72,6 +73,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: background-color 0.6s ease-in-out, color 0.6s ease-in-out, border-color 0.6s ease-in-out;
 }
 
 body {

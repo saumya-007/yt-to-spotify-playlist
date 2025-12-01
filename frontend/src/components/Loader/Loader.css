@@ -11,6 +11,15 @@
   top: 0;
   left: 0;
   z-index: 9999;
+  cursor: wait;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+[data-theme="dark"] .spinner-wrapper {
+  background: rgba(0, 0, 0, 0.95);
 }
 
 .loading-text {
@@ -45,7 +54,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--primary-color);
+  background: var(--text-primary);
   margin: -4px 0 0 -4px;
 }
 .lds-roller div:nth-child(1) {
