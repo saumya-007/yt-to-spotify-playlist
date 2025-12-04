@@ -3,4 +3,4 @@
 /test-*
 nginx.conf
 *.env*
-*oauth-creeds*
+/frontend/build
