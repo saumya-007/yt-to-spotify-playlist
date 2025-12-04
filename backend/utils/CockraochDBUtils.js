@@ -2,7 +2,6 @@ const { Pool } = require('pg');
 
 class CockraochDBUtils {
   constructor({ connectionString, database }) {
-    console.log(connectionString);
     this.cockroachPool = new Pool({
       connectionString,
     });
@@ -17,7 +16,10 @@ class CockraochDBUtils {
       if (!connection) {
         throw new Error('Error connecting to DB :: connection not found');
       }
+      console.log('DB Connected');
     } catch (err) {
+      console.log('Database connection failed');
+      console.log(err);
       throw err;
     }
   }

@@ -9,14 +9,6 @@ function ConverterComponenet({setIsLoading}) {
   const [sourceLink, setSourceLink] = useState('');
   const [playlistName, setPlaylistName] = useState('');
 
-  // Debug effect to track component mounting/unmounting
-  useEffect(() => {
-    console.log('ConverterComponent mounted');
-    return () => {
-      console.log('ConverterComponent unmounted');
-    };
-  }, []);
-
   const convertHandler = () => {
     // Validate inputs
     if (!sourceLink.trim()) {
@@ -38,12 +30,8 @@ function ConverterComponenet({setIsLoading}) {
       return;
     }
 
-    console.log('Starting conversion with:', { sourceLink, playlistName });
-
     API_REQUESTS.convertYoutubeData({
       setResponse: (url) => {
-        console.log('API Response received:', url, typeof url);
-        console.log('Navigating to results with:', url);
         // Navigate to results page with the data - no need to check if mounted since we're leaving this page anyway
         navigate('/results', {
           state: {

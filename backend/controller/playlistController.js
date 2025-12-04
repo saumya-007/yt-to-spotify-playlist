@@ -57,7 +57,8 @@ module.exports.convertYoutubePlaylist = async function (req, res) {
       }
     })
   } catch (err) {
+    const message = 'Error while converting playlist';
     console.error(err);
-    res.status(404).send({ ...responseError, message: 'Error while converting playlist' })
+    res.status(404).send({ ...responseError, message})
   }
 }

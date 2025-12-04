@@ -23,6 +23,8 @@ class GoogleAPIUtils {
 
       return `${this.googleOauthConfig.rootUrl}?${qs.toString()}`
     } catch (e) {
+      console.log('[GoogleAPIUtils] :: Error ====> generateOauthLink');
+      console.log(e);
       throw e;
     } finally {
       console.info('[GoogleAPIUtils] :: Processing done ====> generateOauthLink')
@@ -49,6 +51,8 @@ class GoogleAPIUtils {
 
       return tokenDetails.data;
     } catch (e) {
+      console.log('[GoogleAPIUtils] :: Error ====> getAccessToken');
+      console.log(e);
       throw e;
     } finally {
       console.info('[GoogleAPIUtils] :: Processing done ====> getAccessToken')
@@ -73,6 +77,8 @@ class GoogleAPIUtils {
 
       return tokenDetails.data;
     } catch (e) {
+      console.log('[GoogleAPIUtils] :: Error ====> updateAccessToken');
+      console.log(e);
       throw e;
     } finally {
       console.info('[GoogleAPIUtils] :: Processing done ====> updateAccessToken')
@@ -113,6 +119,8 @@ class GoogleAPIUtils {
 
       return returnObject;
     } catch (e) {
+      console.log('[GoogleAPIUtils] :: Error ====> getPlaylistDetails');
+      console.log(e);
       throw e;
     } finally {
       console.info('[GoogleAPIUtils] :: Processing done ====> getPlaylistDetails')

@@ -86,7 +86,7 @@ function AppContent() {
                       setAuthenticated={setIsSpotifyAuthenticated}
                       backgroundImage={spotifyLogo}
                       apiCallGetLink={API_REQUESTS.getOauthLinkSpotify}
-                      apiCallAuthenticate={API_REQUESTS.authenticateSportify}
+                      apiCallAuthenticate={API_REQUESTS.authenticateSpotify}
                       buttonClass={'spotify'}
                       setIsLoading={setIsLoading}
                     />

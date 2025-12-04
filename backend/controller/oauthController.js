@@ -35,7 +35,10 @@ module.exports.getGoogleOauthLink = function (_, res) {
     const oauthLink = googleAPICall.generateOauthLink();
     res.status(200).send({ ...responseSuccess, data: oauthLink });
   } catch (err) {
-    res.status(400).send({ ...responseError, message: 'Error while generating oauth link for google' });
+    const message = 'Error while generating oauth link for google';
+    console.log(message);
+    console.log(err);
+    res.status(400).send({ ...responseError, message });
   }
 }
 
@@ -89,7 +92,10 @@ module.exports.googleAuthenticate = async function (req, res) {
       }
     });
   } catch (err) {
-    res.status(400).send({ ...responseError, message: 'Error while google authentication' });
+    const message = 'Error while google authentication';
+    console.log(message);
+    console.log(err);
+    res.status(400).send({ ...responseError, message });
   }
 }
 
@@ -99,8 +105,10 @@ module.exports.getSpotifyOauthLink = function (_, res) {
     const oauthLink = spotifyAPICall.generateOauthLink({ state });
     res.status(200).send({ ...responseSuccess, data: oauthLink });
   } catch (err) {
+    const message = 'Error while generating oauth link for spotify';
+    console.log(message);
     console.log(err);
-    res.status(400).send({ ...responseError, message: 'Error while generating oauth link for spotify' });
+    res.status(400).send({ ...responseError, message });
   }
 }
 
@@ -129,8 +137,11 @@ module.exports.spotifyAuthenticate = async function (req, res) {
       spotifyTokenExpiresAt: expiryTime
     });
 
-    res.status(200).send({ ...responseSuccess, data: 'sportify authenticated' });
+    res.status(200).send({ ...responseSuccess, data: 'Spotify authenticated' });
   } catch (err) {
-    res.status(400).send({ ...responseError, message: 'Error while sportify authentication' });
+    const message = 'Error while generating oauth link for spotify';
+    console.log(message);
+    console.log(err);
+    res.status(400).send({ ...responseError, message: 'Error while spotify authentication' });
   }
 }

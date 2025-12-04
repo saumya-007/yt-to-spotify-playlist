@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const config = require('./config');
@@ -9,6 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.get(['/', '/health-check'],(_, res) => res.send('Ok we are live'));
 app.use('/oauth',oauthRoutes);
 app.use('/playlist', playlistRoutes);
 app.use('/user', userRoutes);

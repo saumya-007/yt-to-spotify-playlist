@@ -25,7 +25,7 @@ module.exports.spotifyOauthOptionsConfig = {
 }
 
 module.exports.cockroachCloudCluster = {
-  connectionString: 'postgresql://lsm-admin:DTQuLfHyknxapEW1QByNag@lms-project-2473.7s5.aws-ap-south-1.cockroachlabs.cloud:26257/playlistconverter_db?sslmode=verify-full',
+  connectionString: process.env.cockroachUrl,
   dbName: 'playlistconverter_db'
 }
 

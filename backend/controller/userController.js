@@ -11,8 +11,11 @@ module.exports.getUserTokenStatus = async function (req, res) {
         spotifyAuthenticated: !!tokenDetails?.access_token_spotify && !!tokenDetails?.refresh_token_spotify,
     } });
   } catch (err) {
+    const message = 'Error while getting token details';
+    console.log(message);
+    console.log(err);
     res
       .status(400)
-      .send({ ...responseError, message: "Error while getting token details" });
+      .send({ ...responseError, message });
   }
 };

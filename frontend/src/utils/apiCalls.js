@@ -44,7 +44,7 @@ const getOauthLinkSpotify = async ({ setResponse }) => {
   }
 };
 
-const authenticateSportify = async ({
+const authenticateSpotify = async ({
   setResponse,
   metaData,
   setIsLoading,
@@ -70,7 +70,7 @@ const authenticateSportify = async ({
         console.log(error);
       });
   } catch (e) {
-    toast.error("Error while generating authenticating sportify");
+    toast.error("Error while generating authenticating spotify");
     console.log(e);
   }
 };
@@ -120,10 +120,6 @@ const convertYoutubeData = async ({ setResponse, metaData, setIsLoading }) => {
     })
       .then((response) => {
         setIsLoading(false);
-        console.log("Full API response:", response);
-        console.log("Response data:", response.data);
-        console.log("Response data.data:", response.data.data);
-        console.log("URL from response:", response.data.data.url);
         setResponse(response.data.data.url);
       })
       .catch((error) => {
@@ -163,7 +159,7 @@ const API_REQUESTS = {
   getOauthLinkGoogle,
   getOauthLinkSpotify,
   convertYoutubeData,
-  authenticateSportify,
+  authenticateSpotify,
   authenticateGoogle,
   getUserTokenStatus,
 };

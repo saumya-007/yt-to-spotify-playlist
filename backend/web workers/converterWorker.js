@@ -54,7 +54,7 @@ let failedToFindOnSpotify = [];
 
     } while (nextPageToken);
 
-    // Once all data is recieved from sportify we we create a new playlist
+    // Once all data is recieved from spotify we we create a new playlist
     const newSpotifyPlayList = await spotifyAPICall.createSpotifyPlaylist({
       accessToken: userTokenDetails.access_token_spotify,
       userId: userTokenDetails.spotify_user_id,

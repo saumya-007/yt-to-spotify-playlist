@@ -17,7 +17,6 @@ function Timeline({
   useEffect(() => {
     setCurrentPath(location.pathname);
   }, [location.pathname, isGoogleAuthenticated, isSpotifyAuthenticated]);
-  console.log({isGoogleAuthenticated, isSpotifyAuthenticated})
 
   const googleAuthClickedHandler = () => navigate('/');
   const spotifyAuthClickedHandler = () => navigate('/spotify');

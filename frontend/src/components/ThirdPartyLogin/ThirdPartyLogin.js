@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './ThirdPartyLogin.css';
 import API_REQUESTS from '../utils/apiCalls';
-// import { toast } from 'react-toastify';
 import { useSearchParams } from "react-router-dom";
 
 import { Outlet, Routes, Route } from 'react-router-dom';
@@ -9,10 +8,8 @@ import Timeline from './TimeLine';
 
 function ThirdPartyLogin() {
 
-  // const previousButtonClicked = localStorage.getItem('activeLink');
   const [searchParams] = useSearchParams();
   searchParams.get('code')
-  // const [oauthLinkClicked, setOauthLinkClicked] = useState();
   const [oauthLink, setOauthLink] = useState({ google: '#', spotify: '#' });
   console.log(oauthLink);
   const handleOauthLinkGoogle = (link) => {

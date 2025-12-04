@@ -25,6 +25,8 @@ class SpotifyAPIUtils {
 
       return `${this.spotifyOauthConfig.rootUrl}?${qs.toString()}`
     } catch (e) {
+      console.log('[SpotifyAPIUtils] :: Error ====> generateOauthLink');
+      console.log(e);
       throw e;
     } finally {
       console.info('[SpotifyAPIUtils] :: Processing done ====> generateOauthLink')
@@ -50,6 +52,8 @@ class SpotifyAPIUtils {
 
       return tokenDetails.data;
     } catch (e) {
+      console.log('[SpotifyAPIUtils] :: Error ====> getAccessToken');
+      console.log(e);
       throw e;
     } finally {
       console.info('[SpotifyAPIUtils] :: Processing done ====> getAccessToken')
@@ -73,6 +77,8 @@ class SpotifyAPIUtils {
 
       return tokenDetails.data;
     } catch (e) {
+      console.log('[SpotifyAPIUtils] :: Error ====> updateAccessToken');
+      console.log(e);
       throw e;
     } finally {
       console.info('[SpotifyAPIUtils] :: Processing done ====> updateAccessToken')
@@ -92,6 +98,8 @@ class SpotifyAPIUtils {
 
       return getSpotifyUserDetails.data
     } catch (e) {
+      console.log('[SpotifyAPIUtils] :: Error ====> getSpotifyUserDetails');
+      console.log(e);
       throw e;
     } finally {
       console.info('[SpotifyAPIUtils] :: Processing done ====> getSpotifyUserDetails')
@@ -116,6 +124,8 @@ class SpotifyAPIUtils {
 
       return newSpotifyPlayList.data
     } catch (e) {
+      console.log('[SpotifyAPIUtils] :: Error ====> createSpotifyPlaylist');
+      console.log(e);
       throw e;
     } finally {
       console.info('[SpotifyAPIUtils] :: Processing done ====> createSpotifyPlaylist')
@@ -157,6 +167,8 @@ class SpotifyAPIUtils {
 
       return {unableToConvert, uri};
     } catch (e) {
+      console.log('[SpotifyAPIUtils] :: Error ====> searchSpotifyTrackByName');
+      console.log(e);
       throw e;
     } finally {
       console.info('[SpotifyAPIUtils] :: Processing done ====> searchSpotifyTrackByName')
@@ -178,6 +190,8 @@ class SpotifyAPIUtils {
       })
       return response.data;
     } catch (e) {
+      console.log('[SpotifyAPIUtils] :: Error ====> addItemToSpotifyPlaylist');
+      console.log(e);
       throw e;
     } finally {
       console.info('[SpotifyAPIUtils] :: Processing done ====> addItemToSpotifyPlaylist')
